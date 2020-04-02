@@ -1,0 +1,16 @@
+#!/usr/local/bin/node
+
+let request = require("request");
+let Phrase = require("mhartl-palindrome");
+let url = "https://cdn.learnenough.com/phrases.txt";
+
+request(url, function (error, response, body) {
+  body.split("\n").filter(line => new Phrase(line).palindrome()).forEach((line) => {
+    console.log("palindrome detected:", line);
+  });
+
+  console.log('error:', error); // Print the error if one occurred
+  // Print the response status code if a response was received
+  console.log('statusCode:', response && response.statusCode);
+  console.log('body:', body); // Print the HTML for the Google homepage.
+});
